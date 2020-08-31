@@ -4,14 +4,13 @@ const Bodies = Matter.Bodies;
 
 var maxDrops=100;
 
+var engine,world;
+var random;
+var drops = [];
+
 var Thunder1,Thuder2,Thunder3,Thunder4;
 
-
-for(var i=0;i<maxDrops;i++){
-    drops.push(new createDrop(random(0,400),random(0,400)));
-}
-
-
+var thunderCreatedFrame=0;
 
 function preload(){
 
@@ -23,17 +22,32 @@ function preload(){
 }
 
 function setup(){
-   canvas(400,400)
+    engine = Engine.create();
+    world = engine.world;
+
+   createCanvas(400,800)
+   umbrella = new Umbrella(200,200)
+ 
+   //creating the drops according to the framCount
+
+   if(frameCount % 150 === 0){
+
+for(var i=0;i<maxDrops;i++){
+    drops.push(new createDrop(random(0,400),random(0,400)));
+}
+
+   }
     
 }
 
 function draw(){
     Engine.update(engine);
     background(0);
-    rand=math.round(random(1,4));
-    if(frameCount%80===0){
 
-Thunder=createSprite(random(10,370),random(10,30),10,10);
+    rand=Math.round(random(1,4));
+    if(frameCount%80===0){
+thunderCreatedFrame=frameCount;
+thunder=createSprite(random(10,370),random(10,30),10,10);
 
 switch(rand){
 
@@ -49,7 +63,15 @@ switch(rand){
 }
 
     }
-    
+
+    //displaying the rain drops
+
+    for(var i =0; i<maxDrops;i++){
+        drops[i].showDrop();
+        drops[i].updateY();
+
+    }
+    drawSprites();
 }   
 
 
