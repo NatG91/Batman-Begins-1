@@ -8,7 +8,9 @@ var engine,world;
 var random;
 var drops = [];
 
-var Thunder1,Thuder2,Thunder3,Thunder4;
+var Thunder1,Thunder2,Thunder3,Thunder4;
+var thunder
+var umbrella
 
 var thunderCreatedFrame=0;
 
@@ -25,7 +27,7 @@ function setup(){
     engine = Engine.create();
     world = engine.world;
 
-   createCanvas(400,800)
+   createCanvas(1600,800)
    umbrella = new Umbrella(200,200)
  
    //creating the drops according to the framCount
@@ -33,7 +35,7 @@ function setup(){
    if(frameCount % 150 === 0){
 
 for(var i=0;i<maxDrops;i++){
-    drops.push(new createDrop(random(0,400),random(0,400)));
+    drops.push(new Drops(random(0,400),random(0,400)));
 }
 
    }
@@ -45,23 +47,29 @@ function draw(){
     background(0);
 
     rand=Math.round(random(1,4));
+
     if(frameCount%80===0){
 thunderCreatedFrame=frameCount;
 thunder=createSprite(random(10,370),random(10,30),10,10);
 
 switch(rand){
 
-    case 1 : Thunder.addImage(Thunder1);
+    case 1 : thunder.addImage(Thunder1);
     break;
-    case 2 : Thunder.addImage(Thunder2);
+    case 2 : thunder.addImage(Thunder2);
     break;
-    case 3 : Thunder.addImage(Thunder3);
+    case 3 : thunder.addImage(Thunder3);
     break;
-    case 4 : Thunder.addImage(Thunder4);
+    case 4 : thunder.addImage(Thunder4);
     break;
     default:break
 }
+thunder.scale = random(0.3,0.6)
+}   
 
+    if(thunderCreatedFrame+10===frameCount && thunder){
+        thunder.destroy();
+    
     }
 
     //displaying the rain drops
@@ -71,6 +79,7 @@ switch(rand){
         drops[i].updateY();
 
     }
+    umbrella.display();
     drawSprites();
 }   
 

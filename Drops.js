@@ -1,7 +1,6 @@
 class Drops {
     constructor(x,y) {
       var options = {
-          isStatic: true,
           friction:0.001,
           restitution:0.1
       }
@@ -13,7 +12,7 @@ class Drops {
     updateY(){
       if(this.rain.position.y>height){
 
-        Matter.Body.setPosition(this.rain,{x:random(0,400),y:random(0,400)})
+        Matter.Body.setPosition(this.rain,{x:random(0,400),y:random(0,800)})
     }
     }
     showDrop(){
