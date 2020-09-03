@@ -28,7 +28,7 @@ function setup(){
     world = engine.world;
 
    createCanvas(1600,800)
-   umbrella = new Umbrella(200,200)
+   umbrella = new Umbrella(200,600)
  
    //creating the drops according to the framCount
 
